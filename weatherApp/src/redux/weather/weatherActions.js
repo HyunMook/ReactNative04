@@ -43,13 +43,6 @@ export function transWeather(api_data) {
   };
 }
 
-export function loadWeather(data) {
-  return { type: LOAD_WEATHER_DATA, payload: data };
-}
-
-export function loadCurrentLocationWeather() {
-  return (dispatch) => {
-    dispatch(geoActions.autoGeolocation());
-    return dispatch(loadWeather());
-  };
+export function loadWeather(trans_data) {
+  return { type: LOAD_WEATHER_DATA, payload: trans_data };
 }

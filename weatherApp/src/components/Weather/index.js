@@ -42,6 +42,7 @@ class Weather extends Component {
   };
 
   render() {
+    console.log('WWWWWWWW render():', this.props);
     const nowLoading = this.props.weather.id == '' ? true : false;
 
     return (
