@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import store from './src/store';
-import WeatherContainer from './src/reducers/weather/weatherContainer';
+import store from './src/redux/store';
+import WeatherContainer from './src/redux/weather/weatherContainer';
 
 export default class App extends Component {
   render() {

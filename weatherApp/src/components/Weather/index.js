@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
 import Top from './Top';
@@ -13,7 +14,7 @@ class Weather extends Component {
   }
 
   componentWillMount() {
-    // console.log('componentWillMount-props', this.props);
+    console.log('componentWillMount-props', this.props);
     if (
       this.props.geolocation.latitude == 0 &&
       this.props.geolocation.longitude == 0
@@ -34,6 +35,12 @@ class Weather extends Component {
     }
   }
 
+  _pushScreenOnStack = () => {
+    Navigation.push(this.props.componentId, {
+      component: this.props.geolocationNaviComponent,
+    });
+  };
+
   render() {
     const nowLoading = this.props.weather.id == '' ? true : false;
 
@@ -53,7 +60,10 @@ class Weather extends Component {
               temp_max={this.props.weather.temp_max}
               wind_speed={this.props.weather.wind_speed}
             />
-            <Bottom locationName={this.props.weather.location} />
+            <Bottom
+              locationName={this.props.weather.location}
+              onPressFunc={this._pushScreenOnStack}
+            />
           </View>
         )}
       </View>
