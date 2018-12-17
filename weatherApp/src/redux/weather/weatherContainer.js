@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
     temp,
     temp_max,
     wind_speed,
+    colors,
   } = state.weather;
   return {
     weather: {
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => {
       temp,
       temp_max,
       wind_speed,
+      colors,
     },
     geolocation: {
       latitude: state.geolocation.latitude,

@@ -9,6 +9,7 @@ const initialState = {
   temp_min: 0,
   temp_max: 0,
   wind_speed: 0,
+  colors: ['', ''],
 };
 
 export default function weather(state = initialState, action) {
@@ -24,6 +25,7 @@ export default function weather(state = initialState, action) {
         temp,
         temp_max,
         wind_speed,
+        colors,
       } = action.payload;
       return {
         id,
@@ -34,6 +36,7 @@ export default function weather(state = initialState, action) {
         temp,
         temp_max,
         wind_speed,
+        colors,
       };
     default:
       return state;

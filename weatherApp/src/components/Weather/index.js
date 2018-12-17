@@ -49,7 +49,12 @@ class Weather extends Component {
         {nowLoading ? (
           <Loading />
         ) : (
-          <View style={Styles.container}>
+          <View
+            style={[
+              Styles.container,
+              { backgroundColor: this.props.weather.colors[1] },
+            ]}
+          >
             <Top
               iconName={this.props.weather.icon}
               weatherName={this.props.weather.name}

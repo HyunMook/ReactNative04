@@ -36,6 +36,7 @@ export function transWeather(api_data) {
           temp: api_data.main.temp,
           temp_max: api_data.main.temp_max,
           wind_speed: api_data.wind.speed,
+          colors: weatherCases[i].colors,
         };
         return dispatch(loadWeather(obj));
       }
