@@ -18,10 +18,9 @@ const mapStateToProps = (state) => {
 // props 값으로 넣어 줄 액션 함수들을 정의
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadWeather: (lat, long) =>
-      dispatch(weatherActions.fetchWeatherData(lat, long)),
-    setGeolocation: (lat, long) =>
-      dispatch(actions.changeGeolocation(lat, long)),
+    changeGeolocation: (inputText) =>
+      dispatch(actions.changeGeolocation(inputText)),
+    loadWeather: () => dispatch(weatherActions.fetchWeatherData()),
   };
 };
 const GeoContainer = connect(

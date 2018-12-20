@@ -14,24 +14,25 @@ class Weather extends Component {
   }
 
   componentWillMount() {
-    console.log('componentWillMount-props', this.props);
-    if (
-      this.props.geolocation.latitude == 0 &&
-      this.props.geolocation.longitude == 0
-    ) {
-      this.props.autoGeolocation();
-    }
+    // console.log('componentWillMount-props', this.props);
+  }
+  componentDidMount() {
+    console.log('componentDidMount-props', this.props);
+    this.props.loadCurrentLocationWeather();
   }
   componentWillUpdate() {
     // console.log('componentWillUpdate-props', this.props);
   }
   componentDidUpdate() {
     // console.log('componentDidUpdate-props', this.props);
-    if (this.props.weather.id == '') {
-      this.props.loadWeather(
-        this.props.geolocation.latitude,
-        this.props.geolocation.longitude,
-      );
+  }
+  componentWillReceiveProps(nextProps) {
+    // console.log('componentWillReceiveProps', nextProps);
+    if (!!nextProps.geolocation.err) {
+      console.log('geolocation ERROR:', nextProps.geolocation.err);
+    }
+    if (!!nextProps.weather.err) {
+      console.log('weather ERROR:', nextProps.weather.err);
     }
   }
 
@@ -42,14 +43,11 @@ class Weather extends Component {
   };
 
   render() {
-    console.log('WWWWWWWW render():', this.props);
-    const nowLoading = this.props.weather.id == '' ? true : false;
-
+    // console.log('WWWWWWWWWW render(state):', this.state);
+    // console.log('WWWWWWWWWW render(props):', this.props);
     return (
       <View style={{ flex: 1 }}>
-        {nowLoading ? (
-          <Loading />
-        ) : (
+        {this.props.geolocation.loadState && this.props.weather.loadState ? (
           <View
             style={[
               Styles.container,
@@ -71,6 +69,8 @@ class Weather extends Component {
               onPressFunc={this._pushScreenOnStack}
             />
           </View>
+        ) : (
+          <Loading />
         )}
       </View>
     );
@@ -90,16 +90,7 @@ Weather.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
   }),
-  loadWeather: PropTypes.func.isRequired,
-  autoGeolocation: PropTypes.func.isRequired,
+  loadCurrentLocationWeather: PropTypes.func.isRequired,
 };
-
-// Weather.defaultProps = {
-//   lat: 0,
-//   long: 0,
-//   openWeather: () => console.log('openWeather'),
-//   loadWeather: () => console.log('loadWeather'),
-//   transWeather: () => console.log('transWeather'),
-// };
 
 export default Weather;

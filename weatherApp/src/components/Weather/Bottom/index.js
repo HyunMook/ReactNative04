@@ -7,7 +7,7 @@ const Bottom = ({ locationName, onPressFunc }) => {
   return (
     <View style={Styles.container}>
       <Text style={Styles.title} onPress={onPressFunc}>
-        {locationName}
+        {locationName || 'IDK where it is.'}
       </Text>
     </View>
   );

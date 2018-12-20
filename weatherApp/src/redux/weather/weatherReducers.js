@@ -1,6 +1,12 @@
-import { LOAD_WEATHER_DATA } from './weatherActions';
+import {
+  SET_WEATHER_DATA,
+  GET_WEATHER_DATA,
+  ERR_WEATHER_DATA,
+} from './weatherActions';
 
 const initialState = {
+  loadState: false,
+  err: false,
   id: 0,
   icon: '',
   name: '',
@@ -15,28 +21,19 @@ const initialState = {
 export default function weather(state = initialState, action) {
   // console.log('payload', action.payload);
   switch (action.type) {
-    case LOAD_WEATHER_DATA:
-      const {
-        id,
-        icon,
-        name,
-        location,
-        temp_min,
-        temp,
-        temp_max,
-        wind_speed,
-        colors,
-      } = action.payload;
+    case GET_WEATHER_DATA:
+      return { ...state, loadState: false };
+    case SET_WEATHER_DATA:
       return {
-        id,
-        icon,
-        name,
-        location,
-        temp_min,
-        temp,
-        temp_max,
-        wind_speed,
-        colors,
+        ...state,
+        ...action.payload,
+        loadState: true,
+        err: false,
+      };
+    case ERR_WEATHER_DATA:
+      return {
+        ...state,
+        err: action.payload,
       };
     default:
       return state;
