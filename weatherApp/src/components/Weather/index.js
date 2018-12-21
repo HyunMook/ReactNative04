@@ -100,7 +100,8 @@ Weather.propTypes = {
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
   }),
-  loadCurrentLocationWeather: PropTypes.func.isRequired,
+  loadGeolocation: PropTypes.func.isRequired,
+  loadWeather: PropTypes.func.isRequired,
 };
 
 export default Weather;
