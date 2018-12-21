@@ -1,4 +1,3 @@
-import * as geoActions from '../geolocation/geoActions';
 import OWM_API_KEY from '../../api_key';
 import weatherCases from './weatherCases';
 
@@ -26,6 +25,7 @@ export function fetchWeatherData() {
       })
       .catch(function(err) {
         dispatch({ type: ERR_WEATHER_DATA, payload: err });
+        throw new Error('Weather API fetch Error!');
       });
   };
 }
@@ -55,21 +55,4 @@ export function transWeatherData(api_data) {
 
 export function setWeatherData(trans_data) {
   return { type: SET_WEATHER_DATA, payload: trans_data };
-}
-
-/**
- * 현재 Device 위치 기반 날씨 데이터 불러오기;
- * TODO:  여기서 geolocation Actions를 참조하지 말고,
- *        컴포넌트에서 geolocation과 weather를 순차적으로 불러오도록 하자.
- *        (try/catch, async/await)
- */
-export function loadCurrentLocationWeather() {
-  return async (dispatch) => {
-    try {
-      await dispatch(geoActions.autoGeolocation());
-      await dispatch(fetchWeatherData());
-    } catch (err) {
-      dispatch({ type: ERR_WEATHER_DATA, payload: err });
-    }
-  };
 }

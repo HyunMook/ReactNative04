@@ -18,7 +18,8 @@ class Weather extends Component {
   }
   componentDidMount() {
     console.log('componentDidMount-props', this.props);
-    this.props.loadCurrentLocationWeather();
+    // this.props.loadCurrentLocationWeather();
+    this._loadDefault();
   }
   componentWillUpdate() {
     // console.log('componentWillUpdate-props', this.props);
@@ -35,6 +36,15 @@ class Weather extends Component {
       console.log('weather ERROR:', nextProps.weather.err);
     }
   }
+
+  _loadDefault = async () => {
+    try {
+      await this.props.loadGeolocation();
+      await this.props.loadWeather();
+    } catch (err) {
+      alert(err);
+    }
+  };
 
   _pushScreenOnStack = () => {
     Navigation.push(this.props.componentId, {

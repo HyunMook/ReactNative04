@@ -29,10 +29,11 @@ export function autoGeolocation() {
     await getCurrentPositionPromise().then(
       (position) => {
         const { latitude, longitude } = position.coords;
-        return dispatch(setGeolocation(latitude, longitude));
+        dispatch(setGeolocation(latitude, longitude));
       },
       (err) => {
-        return dispatch({ type: ERR_GEOLOCATION, payload: err });
+        dispatch({ type: ERR_GEOLOCATION, payload: err });
+        throw new Error('getCurrentPosition Error!');
       },
     );
   };
