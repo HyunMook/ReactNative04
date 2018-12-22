@@ -45,16 +45,25 @@ Navigation.events().registerAppLaunchedListener(() => {
         {
           component: {
             name: WEATHER_SCREEN,
+            options: {},
             passProps: {
               geolocationNaviComponent: _naviComponent(GEOLOCATION_SCREEN, {
-                topBar: { title: { text: 'Change Location' } },
+                topBar: {
+                  visible: true,
+                  title: { text: 'Change Location' },
+                },
               }),
             },
             options: { topBar: { visible: false } },
           },
         },
       ],
-      options: {},
+      options: {
+        topBar: {
+          visible: false,
+          drawBehind: true,
+        },
+      },
     },
   };
   const sideMenuType = {
